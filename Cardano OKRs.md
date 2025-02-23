@@ -203,7 +203,7 @@ Intersect's responsibilities include:
 
 Intersect's primary mandate is to empower Cardano's community to autonomously define its strategic direction through decentralized governance. It does not act as a centralized authority but as a coordinator, ensuring OKRs remain community-owned and aligned with measurable, long-term goals that guide budgetary decisions.
 
-#### How Intersect Should Faciliate the Process
+#### How Intersect Should Facilitate the Process
 
 The process for defining and implementing Cardano-wide OKRs is structured to maximize community participation and transparency. This section highlights how Intersect can play a key role in facilitating the processes and promoting decentralized governance:
 
