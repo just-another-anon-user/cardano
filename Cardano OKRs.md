@@ -23,7 +23,7 @@ Cardano's decentralized governance model is built on on-chain mechanisms where s
 - Lack of key analytics readily available about the network to review historical trends for governance decision makers.
 
 **▸ Governance Participation**:
-- Less than 10% of circulating ADA is delegated to active DReps while +58% of circulating ADA is delegated to SPOs. Caveat: ADA on centralized exchanges may be staked but should only be delegated to auto-abstain, unless the shareholder has a mechanism to delegate directly.
+- ~25% of circulating ADA is delegated to active DReps while +58% of circulating ADA is delegated to SPOs. Caveat: ADA on centralized exchanges may be staked but should only be delegated to auto-abstain, unless the shareholder has a mechanism to delegate directly.
 - Less than 33% active DReps compared to active SPOs on the network.
 
 **▸ Fiscal Opacity**:
@@ -367,7 +367,7 @@ Adopting Objectives and Key Results (OKRs) in Cardano's governance model offers 
 - **Increased Efficiency:** With well-defined objectives, DReps can quickly identify which proposals align with community-approved goals, saving up to 10 hours per proposal evaluation.
 - **Enhanced Accountability:** OKRs offer a standardized way to measure and report progress, making it easier for DReps to demonstrate their effectiveness to their delegators.
 - **Strategic Focus:** The OKR framework helps DReps prioritize high-impact initiatives, ensuring their efforts contribute meaningfully to Cardano's growth.
-
+- **Financial Incentive**: The OKR framework provides an strategic alignment to enable DRep compensation that drives decision making to achieve ambitious key results.
 
 #### For Developers:
 
@@ -412,6 +412,88 @@ Adopting Objectives and Key Results (OKRs) in Cardano's governance model offers 
 By adopting OKRs, Cardano creates a win-win scenario for all stakeholders, fostering a more aligned, efficient, and impactful ecosystem. This framework not only drives progress but also enhances the collaborative and transparent nature of Cardano's decentralized governance.
 
 ---
+
+## OKR Driven Financial Compensation for DReps
+This section introduces a financial incentive model to ensure alignment and drive ambitious outcomes within an OKR framework.  Note that this would be an advanced state of the OKR framework being adopted by constitutional ammednement and would require a future hard fork to enable.
+
+
+### How to Balance Ambitious Goals with Democratic Mandate
+The goal is to align DRep behavior with strategic goals while maintaining democratic principles.
+
+**▸ Delegated Representatives**: 
+DReps are tasked with defining high-level Objectives and the framework for Key Results through a democratic process. This ensures that strategic priorities reflect community values and aspirations.  Quantitative measures are left undefined in this phase.
+
+**▸ Constitutional Committee**: 
+The CC is responsible for setting specific, measurable targets for each Key Result (e.g., "Increase developer activity by 40%"). This separation of duties ensures ambitious goal-setting without the risk of sandbagging.
+
+
+### Financial Incentive Model
+The goal is to introduce stretch bonuses, incentivize community involvement in goal-setting, and advanced evaluation tools, to achieve ambitious outcomes and fosters long-term ecosystem success.
+
+
+#### Protocol-Level Parameters
+
+The following parameters are proposed to operationalize the OKR-based reward system:
+
+| Parameter | Description | Example Value |
+| :-- | :-- | :-- |
+| `tau_okr_pool` | % of tau revenue allocated to OKR incentives | 15% |
+| `stretch_bonus_pool` | % of tau revenue allocated to bonus pool for stretch bonuses | 10% |
+| `drep_okr_share` | % of OKR rewards for DReps | 60% |
+| `okr_evaluation_epochs` | Interval of epochs for OKR assessments | 73 |
+| `min_objectives` | Minimum annual strategic objectives | 3 |
+| `okr_vote_activity` | Baseline DRep participation rate | 50% |
+| `rationale_penalty` | Deduction per missing rationale | 10% |
+| `stretch_achievement_cap` | Max % of stretch bonus pool rewarded | 50% |
+
+
+#### OKR Achievement Score
+
+The OKR Achievement Score determines the disbursement from the `tau_okr_pool`:
+
+$$
+\text{OKR Achievement Score} = \begin{cases} 
+\text{Achievement Percentage}, & \text{if } \text{Achievement Percentage} < 80\% \\ 
+1 + (\text{Achievement Percentage} - 80\%) \times \text{Stretch Bonus Multiplier}, & \text{if } \text{Achievement Percentage} \geq 80\%
+\end{cases}
+$$
+
+
+##### Stretch Bonus Pool
+
+The stretch bonus multiplier is based on the `stretch_achievement_cap`. For instance, 100% achievement results in full `tau_okr_pool` disbursement plus 50% of the stretch bonus pool based on a `stretch_achievement_cap` = 50%.
+
+The `stretch_bonus_pool` is funded by:
+
+1. A fixed percentage of tau revenue each cycle.
+2. Unspent funds from previous `tau_okr_pool` allocations when OKRs fail to reach 80%.
+
+
+#### Delegation-Adjusted Payout
+
+Individual DRep rewards are calculated as:
+
+$$
+\text{DRepReward} = \left( \frac{\text{DRepStake}}{\text{TotalStake}} \right) \times (\text{OKR Achievement Score}) \times (\text{tau\_okr\_pool}) \times (\text{drep\_okr\_share}) \times (\text{Participation Factor})
+$$
+
+The Participation Factor adjusts rewards based on baseline voting activity and relevant rationale quality.
+
+
+##### Penalty Mechanism
+
+An NLP system evaluates rationale quality, with penalties applied for missing rationales beyond baseline.  Additionally irrelevant rationales receive a penalty which is automatically checked before vote submission and warns the DRep that their rationale does not meet the standard and would receive a penalty if submitted. The evaluation criteria should be as transparent and as generous as possible, incentivizing basic competence in rationales to avoid gaming the system.
+
+
+### Implementation Requirements
+
+- Ratify protocol changes described via CIP-XXXX.
+- Clearly define roles for DReps and CC in the OKR process.
+- Simulate reward distribution in testnet.
+- Test and refine NLP-based rationale evaluation.
+- Protocol hard fork upgrade.
+- Activate automated reward distribution via smart contract requiring CC approval.
+
 
 ## Implementation Roadmap
 
